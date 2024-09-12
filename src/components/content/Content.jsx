@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 
 import LeftBubble from './LeftBubble.jsx';
 import RightBubble from './RightBubble.jsx';
-import mockData from '../../mock/mockData.json';
 
 const contentWrapper = css`
   width: 100%;
@@ -14,10 +13,10 @@ const contentWrapper = css`
   flex:1;
 `;
 
-export default function Content({ otherName, currentName }) {
+export default function Content({ otherName, currentName, messages }) {
   return (
     <div css={contentWrapper}>
-      {mockData.map((item) => {
+      {messages.map((item) => {
         return item.status === 0 ? (
           <LeftBubble key={item.id} content={item.content} name={otherName} time={item.time}/>
         ) : (

@@ -3,16 +3,17 @@ import { useState } from 'react';
 
 const header = css`
   position: absolute;
-  z-index: 10;
+  z-index: 2;
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px;
+  height: 72px;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
+  background-color: #fff;
 `;
 
 const leftWrapper = css`

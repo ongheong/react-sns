@@ -1,18 +1,20 @@
 import { css } from '@emotion/react';
+import { useEffect, useState } from 'react';
+
 import Header from '../components/header/Header.jsx';
 import Content from '../components/content/Content.jsx';
+import Footer from '../components/footer/Footer.jsx';
+import mockData from '../mock/mockData.json';
 
 const pageWrapper = css`
+  position: relative;
   margin: 0 auto;
-  overflow: hidden;
+  /* overflow: hidden; */
   display: flex;
   flex-direction: column;
-
-  position: relative;
   width: 100%;
   max-width: 430px;
-  /*이 코드 대체 뭐길래 스크롤이 가능하게 하는거지?*/
-  height: calc(var(--vh, 1vh)* 100);
+  border: 1px solid var(--border-color);
 `;
 
 const otherNickName = '손오공';
@@ -20,11 +22,32 @@ const otherName = 'svt';
 const currentName = 'carat';
 
 export default function SNSPage() {
+  const [messages, setMessages] = useState(() => {
+    const mockDataList = mockData;
+    return mockDataList? mockDataList : [];
+  });
+
+  useEffect(() => {
+    
+  }, [messages]);
+  
+  function handleAddMessage(input) {
+    const nowTime = new Intl.DateTimeFormat("ko", { timeStyle: "short"}).format(new Date());
+
+    const newMessage = {
+      id: messages.length + 1,
+      status: 1,
+      content: input,
+      time: nowTime,
+    }
+    setMessages((prev) => [...prev, newMessage]);
+  }
+
   return (
     <div css={pageWrapper}>
       <Header otherNickName={otherNickName} otherName={otherName} />
-      <Content otherName={otherName} currentName={currentName}/>
-      {/* <Footer /> */}
+      <Content otherName={otherName} currentName={currentName} messages={messages}/>
+      <Footer handleAddMessage={handleAddMessage}/>
     </div>
   );
 }
