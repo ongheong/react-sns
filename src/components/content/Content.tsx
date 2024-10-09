@@ -21,18 +21,18 @@ export default function Content({
 
   return (
     <div css={contentWrapper}>
-      {messages.map((item) => {
-        isLeftBubble = item.status === 0 ? true : false;
+      {messages.map((item, index) => {
+        isLeftBubble = item.userId === 0 ? true : false;
         return isLeftBubble ? (
           <LeftBubble
-            key={item.id}
+            key={index}
             content={item.content}
             name={otherName}
             time={item.time}
           />
         ) : (
           <RightBubble
-            key={item.id}
+            key={index}
             content={item.content}
             name={currentName}
             time={item.time}

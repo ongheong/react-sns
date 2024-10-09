@@ -1,7 +1,6 @@
 //index.d.ts
 export interface Message {
-  id: number;
-  status: number;
+  userId: number;
   content: string;
   time: string;
 }
