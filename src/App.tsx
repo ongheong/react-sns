@@ -2,7 +2,7 @@ import { css, Global } from '@emotion/react';
 import 'normalize.css';
 import SNSPage from './pages/SNSPage';
 
-const GlobalStyle : any = () => <Global styles={globalStyle} />;
+const GlobalStyle = (): JSX.Element => <Global styles={globalStyle} />;
 
 function App() {
   return (

@@ -1,7 +1,11 @@
-//sns.d.ts
+//index.d.ts
 export interface Message {
   id: number;
   status: number;
   content: string;
   time: string;
 }
+
+declare module '*.svg';
+declare module '*.png';
+declare module '*.jpg';

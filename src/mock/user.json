@@ -1,0 +1,17 @@
+[
+  {
+    "userId": 0,
+    "userName": "carat",
+    "profile": "/assets/carat.png"
+  },
+  {
+    "userId": 1,
+    "userName": "svt",
+    "profile": "/assets/seventeen.png"
+  },
+  {
+    "userId": 2,
+    "userName": "jun",
+    "profile": "/assets/jun.png"
+  }
+]

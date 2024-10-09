@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { useState, useRef } from 'react';
-import { Message } from '../../sns';
+import { Message } from '../..';
 
 interface InputFieldProps {
   isMuted: boolean;

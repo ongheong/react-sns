@@ -5,7 +5,7 @@ import Header from '../components/header/Header';
 import Content from '../components/content/Content';
 import InputField from '../components/footer/InputField';
 import mockData from '../mock/mockData.json';
-import { Message } from '../sns';
+import { Message } from '..';
 
 const OTHER_NICKNAME = '손오공';
 const OTHER_NAME = 'svt';
