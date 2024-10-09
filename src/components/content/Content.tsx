@@ -4,7 +4,7 @@ import LeftBubble from './LeftBubble';
 import RightBubble from './RightBubble';
 import { Message } from '../../sns';
 
-type ContentProps = {
+interface ContentProps {
   isMuted: boolean;
   otherName: string;
   currentName: string;

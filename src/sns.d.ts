@@ -1,7 +1,7 @@
 //sns.d.ts
-export type Message = {
+export interface Message {
   id: number;
   status: number;
   content: string;
   time: string;
-};
+}

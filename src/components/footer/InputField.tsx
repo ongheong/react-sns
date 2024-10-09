@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { useState, useRef } from 'react';
 import { Message } from '../../sns';
 
-type InputFieldProps = {
+interface InputFieldProps {
   isMuted: boolean;
   messages: Message[];
   setMessages: React.Dispatch<React.SetStateAction<Message[]>>;

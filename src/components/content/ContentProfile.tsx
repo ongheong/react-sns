@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-type ContentProfileProps = {
+interface ContentProfileProps {
     src: string;
 }
 

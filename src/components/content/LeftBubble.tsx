@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import ContentProfile from './ContentProfile';
 
-type LeftBubbleProps = {
+interface LeftBubbleProps {
   content: string;
   name: string;
   time: string;
