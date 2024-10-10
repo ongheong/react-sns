@@ -1,7 +1,7 @@
 import { css, Global } from '@emotion/react';
 import 'normalize.css';
 import { Route, Routes } from "react-router-dom";
-// import ChatRoomPage from './pages/SNSPage';
+import ChatRoomPage from './pages/ChatRoomPage';
 import ChatRoomListPage from './pages/ChatRoomListPage';
 
 const GlobalStyle = (): JSX.Element => <Global styles={globalStyle} />;
@@ -12,7 +12,7 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<ChatRoomListPage />} />
-        {/* <Route path="/" element={<ChatRoomPage />} /> */}
+        <Route path="/chat/:roomId" element={<ChatRoomPage />} />
       </Routes>
     </>
   );
@@ -48,6 +48,12 @@ const globalStyle: any = css`
   }
   button {
     border: none;
+    cursor: pointer;
+  }
+  a {
+    outline: none;
+    color: inherit;
+    text-decoration: none;
     cursor: pointer;
   }
 `;

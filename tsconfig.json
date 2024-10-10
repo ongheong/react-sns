@@ -12,8 +12,9 @@
       "noImplicitAny": true,
       "allowSyntheticDefaultImports": true, // 기본값 import 허용
       "skipLibCheck": true,
-      "typeRoots": ["./src/index.d.ts", "./node_modules/@types"]
+      "typeRoots": ["./src/index.d.ts", "./node_modules/@types"],
+      "baseUrl": "src"
     },
-    "include": ["src/components", "src/custom.d.ts", "**/*.tsx"],
+    "include": ["src/components", "src/custom.d.ts", "**/*.tsx", "src"],
     "exclude": ["node_modules", "dist"]
   }
