@@ -5,12 +5,15 @@
       "outDir": "./dist",
       "moduleResolution": "Node",
       "lib": ["ES2015", "DOM", "DOM.Iterable"],
-      "jsx": "preserve",
+      "jsx": "react-jsx",
       "resolveJsonModule": true,
       "esModuleInterop": true,
       "jsxImportSource": "@emotion/react",
       "noImplicitAny": true,
+      "allowSyntheticDefaultImports": true, // 기본값 import 허용
+      "skipLibCheck": true,
+      "typeRoots": ["./src/index.d.ts", "./node_modules/@types"]
     },
-    "include": ["./src/**/*"],
+    "include": ["src/components", "src/custom.d.ts", "**/*.tsx"],
     "exclude": ["node_modules", "dist"]
   }

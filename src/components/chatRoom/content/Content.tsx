@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 
 import LeftBubble from './LeftBubble';
 import RightBubble from './RightBubble';
-import { Message } from '../..';
 
 interface ContentProps {
   isMuted: boolean;

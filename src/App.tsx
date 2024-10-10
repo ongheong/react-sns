@@ -1,6 +1,8 @@
 import { css, Global } from '@emotion/react';
 import 'normalize.css';
-import SNSPage from './pages/SNSPage';
+import { Route, Routes } from "react-router-dom";
+// import ChatRoomPage from './pages/SNSPage';
+import ChatRoomListPage from './pages/ChatRoomListPage';
 
 const GlobalStyle = (): JSX.Element => <Global styles={globalStyle} />;
 
@@ -8,7 +10,10 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <SNSPage />
+      <Routes>
+        <Route path="/" element={<ChatRoomListPage />} />
+        {/* <Route path="/" element={<ChatRoomPage />} /> */}
+      </Routes>
     </>
   );
 }
