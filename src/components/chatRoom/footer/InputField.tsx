@@ -1,14 +1,18 @@
 import { css } from '@emotion/react';
 import { useState, useRef } from 'react';
-import { Message } from '../..';
+import { IMessage } from '../../../atom';
+import searchImg from '@/assets/search.svg';
+import sendImg from '@/assets/send.svg';
 
 interface InputFieldProps {
   isMuted: boolean;
-  messages: Message[];
-  setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
-};
+  setMessages: React.Dispatch<React.SetStateAction<IMessage[]>>;
+}
 
-export default function InputField({ isMuted, messages, setMessages }: InputFieldProps) {
+export default function InputField({
+  isMuted,
+  setMessages,
+}: InputFieldProps) {
   const [input, setInput] = useState('');
   const inputRef = useRef(null);
 
@@ -38,8 +42,7 @@ export default function InputField({ isMuted, messages, setMessages }: InputFiel
     }
 
     const newMessage = {
-      id: messages.length + 1,
-      status: 1,
+      userId: 0,
       content: input,
       time: nowTime,
     };
@@ -50,14 +53,14 @@ export default function InputField({ isMuted, messages, setMessages }: InputFiel
     <footer css={footerWrapper}>
       <form css={footerForm} onSubmit={handleForm}>
         <button css={searchBtn}>
-          <img src="/assets/search.svg" css={btnImg} />
+          <img src={searchImg} css={btnImg} />
         </button>
         <textarea
           disabled={isMuted}
           spellCheck="false"
           id="message"
           placeholder={
-            isMuted? "메시지 전송이 불가합니다": "메세지를 보내세요"
+            isMuted ? '메시지 전송이 불가합니다' : '메세지를 보내세요'
           }
           css={messageInput}
           onChange={handleInput}
@@ -65,7 +68,7 @@ export default function InputField({ isMuted, messages, setMessages }: InputFiel
           ref={inputRef}
         />
         <button css={sendBtn} type="submit">
-          <img src="/assets/send.svg" css={btnImg} />
+          <img src={sendImg} css={btnImg} />
         </button>
       </form>
     </footer>

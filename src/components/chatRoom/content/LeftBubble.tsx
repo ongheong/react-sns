@@ -4,14 +4,20 @@ import ContentProfile from './ContentProfile';
 interface LeftBubbleProps {
   content: string;
   name: string;
+  profile: string;
   time: string;
-};
+}
 
-export default function LeftBubble({ content, name, time }: LeftBubbleProps) {
+export default function LeftBubble({
+  content,
+  name,
+  profile,
+  time,
+}: LeftBubbleProps) {
   return (
     <div style={{ width: '100%' }}>
       <div css={leftBubbleContainer}>
-        <ContentProfile src="/assets/seventeen.jpg" />
+        <ContentProfile src={profile} />
         <div css={leftContentContainer}>
           <span style={{ fontSize: '16px' }}>{name}</span>
           <div css={leftMessageContainer}>

@@ -4,10 +4,16 @@ import ContentProfile from './ContentProfile';
 interface RightBubbleProps {
   content: string;
   name: string;
+  profile: string;
   time: string;
-};
+}
 
-export default function RightBubble({ content, name, time }: RightBubbleProps) {
+export default function RightBubble({
+  content,
+  name,
+  profile,
+  time,
+}: RightBubbleProps) {
   return (
     <div style={{ width: '100%' }}>
       <div css={rightBubbleContainer}>
@@ -18,7 +24,7 @@ export default function RightBubble({ content, name, time }: RightBubbleProps) {
             <div css={rightMessage}>{content}</div>
           </div>
         </div>
-        <ContentProfile src="/assets/seventeen.jpg" />
+        <ContentProfile src={profile} />
       </div>
     </div>
   );

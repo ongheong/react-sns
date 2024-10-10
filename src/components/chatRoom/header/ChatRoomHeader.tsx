@@ -1,39 +1,54 @@
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import bellImg from '@/assets/bell.svg';
+import bellSlashImg from '@/assets/bell-slash.svg';
+import videoImg from '@/assets/video.svg';
+import backImg from '@/assets/back.svg';
+import { IUser } from '../../../atom';
 
 interface HeaderProps {
   isMuted: boolean;
   setIsMuted: React.Dispatch<React.SetStateAction<boolean>>;
-	otherNickName: string;
-	otherName: string;
-};
+  roomUsers: IUser[];
+}
 
-export default function Header({ isMuted, setIsMuted, otherNickName, otherName }: HeaderProps) {
+export default function ChatRoomHeader({
+  isMuted,
+  setIsMuted,
+  roomUsers,
+}: HeaderProps) {
+  const navigate = useNavigate();
   function handleMute() {
     setIsMuted(!isMuted);
   }
 
+  function handleBackClick() {
+    navigate('/');
+  }
+  //우선 참여자가 1명이라고 가정
+  const participant = roomUsers.find((user) => user.userId !== 0);
+
   return (
     <header css={header}>
       <div css={leftWrapper}>
-        <img src="/assets/back.svg" css={headerBtn} />
+        <img src={backImg} css={headerBtn} onClick={handleBackClick} />
         <div css={profileWrapper}>
-          <img src="/assets/seventeen.jpg" alt="profile" css={profileImage} />
+          <img src={participant.profile} alt="profile" css={profileImage} />
           <div css={profileContent}>
-            <span css={profileName}>{otherNickName}</span>
-            <span css={profileDesc}>{otherName}</span>
+            <span css={profileName}>{participant.nickName}</span>
+            <span css={profileDesc}>{participant.userName}</span>
           </div>
         </div>
       </div>
       <div css={rightWrapper}>
         <span onClick={handleMute}>
           {isMuted ? (
-            <img src="/assets/bell-slash.svg" css={headerBtn} />
+            <img src={bellSlashImg} css={headerBtn} />
           ) : (
-            <img src="/assets/bell.svg" css={headerBtn} />
+            <img src={bellImg} css={headerBtn} />
           )}
         </span>
-        <img src="/assets/video.svg" css={headerBtn} />
+        <img src={videoImg} css={headerBtn} />
       </div>
     </header>
   );
@@ -70,6 +85,7 @@ const profileImage = css`
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 const profileContent = css`

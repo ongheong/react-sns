@@ -1,39 +1,41 @@
 import { css } from '@emotion/react';
-
+import { IUser, IMessage } from '../../../atom';
 import LeftBubble from './LeftBubble';
 import RightBubble from './RightBubble';
 
 interface ContentProps {
   isMuted: boolean;
-  otherName: string;
-  currentName: string;
-  messages: Message[];
-};
+  roomUsers: IUser[];
+  messages: IMessage[];
+}
 
-export default function Content({
+export default function ChatRoomContent({
   isMuted,
-  otherName,
-  currentName,
+  roomUsers,
   messages,
 }: ContentProps) {
   let isLeftBubble: boolean = false;
+  const participant = roomUsers.find((user) => user.userId !== 0);
+  const user = roomUsers.find((user) => user.userId === 0);
 
   return (
     <div css={contentWrapper}>
       {messages.map((item, index) => {
-        isLeftBubble = item.userId === 0 ? true : false;
+        isLeftBubble = item.userId === 0 ? false : true;
         return isLeftBubble ? (
           <LeftBubble
             key={index}
             content={item.content}
-            name={otherName}
+            name={participant.userName}
+            profile={participant.profile}
             time={item.time}
           />
         ) : (
           <RightBubble
             key={index}
             content={item.content}
-            name={currentName}
+            name={user.userName}
+            profile={user.profile}
             time={item.time}
           />
         );
@@ -41,8 +43,8 @@ export default function Content({
       {isMuted ? (
         <div css={mutedMessage}>
           <hr css={mutedLine} />
-          {otherName.toUpperCase()} 님이 방해 금지 모드를 설정하여 메시지를
-          전송할 수 없습니다.{' '}
+          {participant.userName.toUpperCase()} 님이 방해 금지 모드를 설정하여
+          메시지를 전송할 수 없습니다.{' '}
         </div>
       ) : null}
     </div>
@@ -62,7 +64,6 @@ const mutedMessage = css`
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  height: 100%;
   font-size: 18px;
   font-weight: 400;
   color: var(--main-text-color);
