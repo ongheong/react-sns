@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
-import { useState } from 'react';
-import backIcon from '../../../assets/back.svg';
-import carat from '../../../assets/carat.png';
+import backIcon from '@/assets/back.svg';
 
 export default function ChatRoomListHeader() {
   return (

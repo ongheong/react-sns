@@ -1,6 +1,4 @@
 //ChatRoomListPage.tsx
-import { css } from '@emotion/react';
-import { useEffect, useState } from 'react';
 import * as s from './Page.styles';
 import ChatRoomListHeader from '../components/chatRoomList/header/ChatRoomListHeader'
 import ChatRoomListContent from '../components/chatRoomList/content/ChatRoomListContent'

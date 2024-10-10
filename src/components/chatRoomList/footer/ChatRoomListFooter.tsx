@@ -1,11 +1,9 @@
 import { css } from '@emotion/react';
-import homeIcon from '../../../assets/home.svg';
-import searchIcon from '../../../assets/search.svg';
-import plusIcon from '../../../assets/plus.svg';
-import filmIcon from '../../../assets/film.svg';
-import carat from '../../../assets/carat.png';
-
-
+import homeIcon from '@/assets/home.svg';
+import searchIcon from '@/assets/search.svg';
+import plusIcon from '@/assets/plus.svg';
+import filmIcon from '@/assets/film.svg';
+import carat from '@/assets/carat.png';
 
 export default function ChatRoomListFooter() {
   return (
