@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
 
 interface ListItemProps {
   roomId: number;
@@ -17,17 +18,21 @@ export default function ChatRoomListItem({
 }: ListItemProps) {
   //userId == 0(사용자)이 아닌 대화상대 중 가장 첫번째 사용자의 정보를 가져옴
   const participants = roomUsers.filter((user) => user.userId !== 0);
+  const navigate = useNavigate();
+
+  const handleItemClick = () => {
+    navigate(`/chat/${roomId}`);
+  }
+
   return (
     <>
-      <a href={`/chat/${roomId}`}>
-        <div css={listItemWrapper}>
-          <img src={participants[0].profile} alt="profile" css={profileImg} />
-          <div css={textWrapper}>
-            <span css={userNameText}>{participants[0].userName}</span>
-            <span css={lastMessageText}>{lastMessage}</span>
-          </div>
+      <div css={listItemWrapper} onClick={handleItemClick}>
+        <img src={participants[0].profile} alt="profile" css={profileImg} />
+        <div css={textWrapper}>
+          <span css={userNameText}>{participants[0].userName}</span>
+          <span css={lastMessageText}>{lastMessage}</span>
         </div>
-      </a>
+      </div>
     </>
   );
 }
