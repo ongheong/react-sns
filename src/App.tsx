@@ -29,7 +29,7 @@ const globalStyle: any = css`
     --vh: 9.34px;
   }
   html, body {
-    overflow: scroll; /*위아래는 고정!*/
+    overflow: hidden; /*위아래는 고정!*/
     margin: 0;
     padding: 0;
   }
@@ -41,6 +41,7 @@ const globalStyle: any = css`
   }
   body {
     display: block;
+    overscroll-behavior: none;
   }
   input, textarea {
     outline: none;
