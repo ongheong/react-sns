@@ -2,21 +2,26 @@ import { css } from '@emotion/react';
 import { IUser, IMessage } from '../../../atom';
 import LeftBubble from './LeftBubble';
 import RightBubble from './RightBubble';
+import { useRecoilState } from 'recoil';
+import { messageState } from '../../../atom';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 interface ContentProps {
   isMuted: boolean;
   roomUsers: IUser[];
-  messages: IMessage[];
 }
 
 export default function ChatRoomContent({
   isMuted,
-  roomUsers,
-  messages,
+  roomUsers
 }: ContentProps) {
   let isLeftBubble: boolean = false;
   const participant = roomUsers.find((user) => user.userId !== 0);
   const user = roomUsers.find((user) => user.userId === 0);
+  const [allmessages, setAllMessages] = useRecoilState(messageState);
+  const {roomId} = useParams<{roomId: string}>();
+  const messages = allmessages.find(room => room.roomId === Number(roomId)).messages;
 
   return (
     <div css={contentWrapper}>
@@ -53,10 +58,11 @@ export default function ChatRoomContent({
 
 const contentWrapper = css`
   width: 100%;
-  padding: 100px 16px 100px;
-  gap: 16px;
+  padding: 100px 20px 100px;
+  gap: 20px;
   overflow: scroll;
   flex: 1;
+  flex-direction: column;
 `;
 
 const mutedMessage = css`
