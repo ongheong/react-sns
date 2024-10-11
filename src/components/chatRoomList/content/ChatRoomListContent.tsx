@@ -1,34 +1,34 @@
 import { css } from '@emotion/react';
-import searchIcon from '../../../assets/search.svg';
+import searchIcon from '@/assets/search.svg';
 import { useRef, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { userState, messageState } from '../../../atom';
 import ChatRoomListItem from './ChatRoomListItem';
 
 export default function ChatRoomListContent() {
-  const [input, setInput] = useState('');
+  const [chatInput, setChatInput] = useState('');
   const inputRef = useRef(null);
   const users = useRecoilValue(userState);
-  const messages = useRecoilValue(messageState);
+  const [messages, useMessages] = useRecoilState(messageState);
 
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (input === '') {
+    if (chatInput === '') {
       alert('한 글자 이상 입력해주세요.');
       return;
     }
-    setInput('');
+    setChatInput('');
     if (inputRef.current) inputRef.current.focus();
   };
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setInput(e.target.value);
+    setChatInput(e.target.value);
   };
 
   return (
     <main css={contentWrapper}>
       <form css={footerForm} onSubmit={handleForm}>
-        <span css={searchBtn}>
+        <span css={searchWrapper}>
           <img src={searchIcon} css={btnImg} />
         </span>
         <textarea
@@ -36,7 +36,7 @@ export default function ChatRoomListContent() {
           placeholder="이름검색"
           css={messageInput}
           onChange={handleInput}
-          value={input}
+          value={chatInput}
           ref={inputRef}
         />
       </form>
@@ -80,7 +80,7 @@ const footerForm = css`
   gap: 8px;
 `;
 
-const searchBtn = css`
+const searchWrapper = css`
   width: 36px;
   height: 36px;
   border-radius: 50%;
