@@ -3,18 +3,22 @@ import { useState, useRef } from 'react';
 import { IMessage } from '../../../atom';
 import searchImg from '@/assets/search.svg';
 import sendImg from '@/assets/send.svg';
+import { useRecoilState } from 'recoil';
+import { IRoom, messageState } from '../../../atom';
+import { useParams } from 'react-router-dom';
 
 interface InputFieldProps {
   isMuted: boolean;
-  setMessages: React.Dispatch<React.SetStateAction<IMessage[]>>;
+  // setMessages: React.Dispatch<React.SetStateAction<IMessage[]>>;
 }
 
 export default function InputField({
   isMuted,
-  setMessages,
 }: InputFieldProps) {
   const [input, setInput] = useState('');
+  const [messages, setMessages] = useRecoilState<IRoom[]>(messageState);
   const inputRef = useRef(null);
+  const { roomId } = useParams<{ roomId: string }>();
 
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,15 +50,23 @@ export default function InputField({
       content: input,
       time: nowTime,
     };
-    setMessages((prev) => [...prev, newMessage]);
+
+    setMessages((prev) => 
+      prev.map((room) => {
+        if (room.roomId === Number(roomId)) {
+          return { ...room, messages: [ ...room.messages, newMessage] };
+        }
+        return room;
+      })
+    );
   }
 
   return (
     <footer css={footerWrapper}>
       <form css={footerForm} onSubmit={handleForm}>
-        <button css={searchBtn}>
+        <span css={searchWrapper}>
           <img src={searchImg} css={btnImg} />
-        </button>
+        </span>
         <textarea
           disabled={isMuted}
           spellCheck="false"
@@ -67,7 +79,7 @@ export default function InputField({
           value={input}
           ref={inputRef}
         />
-        <button css={sendBtn} type="submit">
+        <button css={sendBtn(isMuted)} type="submit" >
           <img src={sendImg} css={btnImg} />
         </button>
       </form>
@@ -82,6 +94,8 @@ const footerWrapper = css`
   left: 0;
   width: 100%;
   padding: 12px 8px 32px;
+  display: flex;
+  align-items: center;
 `;
 
 const footerForm = css`
@@ -95,7 +109,7 @@ const footerForm = css`
   gap: 8px;
 `;
 
-const searchBtn = css`
+const searchWrapper = css`
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -122,7 +136,7 @@ const messageInput = css`
   letter-spacing: -0.4px;
 `;
 
-const sendBtn = css`
+const sendBtn = (isMuted: boolean) => css`
   width: 52px;
   height: 36px;
   border-radius: 24px;
@@ -130,4 +144,6 @@ const sendBtn = css`
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: ${isMuted ? 0.5 : 1};
+  pointer-events: ${isMuted ? 'none' : 'auto'};
 `;
