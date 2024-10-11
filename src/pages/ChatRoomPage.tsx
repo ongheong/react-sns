@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { userState, messageState } from '../atom';
 import { useParams } from 'react-router-dom';
 
@@ -13,15 +13,15 @@ export default function ChatRoomPage() {
   const roomValue = useRecoilValue(messageState).find(room => room.roomId === Number(roomId));
 
   // recoil의 useRecoilValue를 사용하여 atom의 상태를 가져오고, params로 받은 roomId를 통해 해당 방의 메시지를 가져옴.
-  const [messages, setMessages] = useState(roomValue.messages);
+  // const [messages, setMessages] = useState(roomValue.messages);
   const [isMuted, setIsMuted] = useState<boolean>(false);
   const roomUsers = roomValue.joinedUsers.map(userId => useRecoilValue(userState).find(user => user.userId === userId));
 
   return (
     <div css={s.pageWrapper}>
       <ChatRoomHeader isMuted={isMuted} setIsMuted={setIsMuted} roomUsers={roomUsers} />
-      <ChatRoomContent isMuted={isMuted} roomUsers={roomUsers} messages={messages}/>
-      <InputField isMuted={isMuted} setMessages={setMessages}/>
+      <ChatRoomContent isMuted={isMuted} roomUsers={roomUsers} />
+      <InputField isMuted={isMuted} />
     </div>
   );
 }
