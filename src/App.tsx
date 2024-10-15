@@ -26,7 +26,6 @@ const globalStyle: any = css`
     --main-text-color: #a6a6a6;
     --other-text-color: #fff;
     --my-text-color: #3a3a3a;
-    --vh: 9.34px;
   }
   html, body {
     overflow: hidden; /*위아래는 고정!*/

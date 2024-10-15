@@ -9,5 +9,5 @@ export const pageWrapper = css`
   width: 100%;
   max-width: 430px;
   border: 1px solid var(--border-color);
-  height: calc(var(--vh, 1vh)* 100);
+  height: 100vh;
 `;
